@@ -6,22 +6,22 @@ metadata:
     cluster-api.cattle.io/rancher-auto-import: "true"
     cni: external
     csi: external
-  name: test-rk
+  name: ryan-test-cluster
   namespace: ns-zaj5v
 spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1alpha1
     kind: RKE2ControlPlane
-    name: test-rk-control-plane
+    name: ryan-test-cluster-control-plane
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
     kind: HarvesterCluster
-    name: test-rk-hv
+    name: ryan-test-cluster-hv
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: HarvesterCluster
 metadata:
-  name: test-rk-hv
+  name: ryan-test-cluster-hv
   namespace: ns-zaj5v
 spec:
   identitySecret:
@@ -49,7 +49,7 @@ metadata:
 apiVersion: controlplane.cluster.x-k8s.io/v1alpha1
 kind: RKE2ControlPlane
 metadata:
-  name: test-rk-control-plane
+  name: ryan-test-cluster-control-plane
   namespace: ns-zaj5v
 spec:
   agentConfig:
@@ -57,7 +57,7 @@ spec:
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
     kind: HarvesterMachineTemplate
-    name: test-rk-cp-machine
+    name: ryan-test-cluster-cp-machine
     namespace: ns-zaj5v
   replicas: 3
   serverConfig:
@@ -67,7 +67,7 @@ spec:
 apiVersion: bootstrap.cluster.x-k8s.io/v1alpha1
 kind: RKE2ConfigTemplate
 metadata:
-  name: test-rk-worker
+  name: ryan-test-cluster-worker
   namespace: ns-zaj5v
 spec:
   template:
@@ -78,34 +78,34 @@ spec:
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: test-rk-workers
+  name: ryan-test-cluster-workers
   namespace: ns-zaj5v
 spec:
-  clusterName: test-rk
+  clusterName: ryan-test-cluster
   replicas: 2
   selector:
     matchLabels:
-      cluster.x-k8s.io/cluster-name: test-rk
+      cluster.x-k8s.io/cluster-name: ryan-test-cluster
   template:
     spec:
       bootstrap:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1alpha1
           kind: RKE2ConfigTemplate
-          name: test-rk-worker
+          name: ryan-test-cluster-worker
           namespace: ns-zaj5v
-      clusterName: test-rk
+      clusterName: ryan-test-cluster
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
         kind: HarvesterMachineTemplate
-        name: test-rk-wk-machine
+        name: ryan-test-cluster-wk-machine
         namespace: ns-zaj5v
       version: v1.26.6
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: HarvesterMachineTemplate
 metadata:
-  name: test-rk-wk-machine
+  name: ryan-test-cluster-wk-machine
   namespace: ns-zaj5v
 spec:
   template:
@@ -125,7 +125,7 @@ spec:
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: HarvesterMachineTemplate
 metadata:
-  name: test-rk-cp-machine
+  name: ryan-test-cluster-cp-machine
   namespace: ns-zaj5v
 spec:
   template:
